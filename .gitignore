@@ -93,3 +93,5 @@ out/
 
 # Electron-builder
 dist/
+package-lock.json
+yarn.lock

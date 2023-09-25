@@ -15,5 +15,19 @@ contextBridge.exposeInMainWorld('electron', {
             if(err) throw err;
             else console.log('Saved');
         })
+    },
+    loadSettingsFile: () => {
+        fs.readFile(path.join(getDesktopOrHomeDir(), '/streamcontrol.json'), function(err, data) {
+            if(err) {
+                //TODO gracefully let the user know
+                console.log("Failed");
+            }
+            else {
+                //TODO properly read buffered data and return the json object from the file
+                console.log("Success");
+                console.log(data);
+                return data;
+            }
+        })
     }
 });

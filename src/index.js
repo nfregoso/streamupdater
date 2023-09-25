@@ -21,6 +21,14 @@ function saveSettings() {
     document.getElementById('notification-saved').style.display = 'block';
 }
 
+function loadSettings() {
+    var preSavedData = window.electron.loadSettingsFile();
+    console.log(preSavedData);
+    if(preSavedData != null) {
+        console.log(preSavedData);
+    }
+}
+
 function openTab(event, tabName) {
     var i, x, tablinks;
     x = document.getElementsByClassName("content-tab");
