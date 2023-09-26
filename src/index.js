@@ -22,11 +22,22 @@ function saveSettings() {
 }
 
 function loadSettings() {
-    var preSavedData = window.electron.loadSettingsFile();
-    console.log(preSavedData);
-    if(preSavedData != null) {
-        console.log(preSavedData);
-    }
+    window.electron.loadSettingsFile().then((data) => {
+        console.log(data);
+        var jsonData = JSON.parse(data);
+        document.getElementById('field-commentator1-name').value = jsonData.cTitle1;
+        document.getElementById('field-commentator2-name').value = jsonData.cTitle2;
+        document.getElementById('field-commentator3-name').value = jsonData.cTitle3;
+        document.getElementById('field-gametitle').value = jsonData.game;
+        document.getElementById('field-player1-name').value = jsonData.p1Name;
+        document.getElementById('field-player1-score').value = jsonData.p1Score;
+        document.getElementById('field-player1-team').value = jsonData.p1Team;
+        document.getElementById('field-player2-name').value = jsonData.p2Name;
+        document.getElementById('field-player2-score').value = jsonData.p2Score;
+        document.getElementById('field-player2-team').value = jsonData.p2Team;
+        document.getElementById('field-gameround').value = jsonData.round;
+        document.getElementById('field-timestamp').value = new Date(jsonData.timestamp * 1000).toISOString().split('T')[0];
+    });
 }
 
 function openTab(event, tabName) {
