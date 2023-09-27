@@ -12,6 +12,7 @@
 <script>
   window.onload = loadSettings();
 </script>
+
 <body>
   <nav class="tabs is-centered">
     <div class="container">
@@ -72,42 +73,62 @@
         </div>
       </div>
 
-      <div class="field">
-        <label class="label">Player 1 Score</label>
-        <div class="control">
-          <input id="field-player1-score" class="input is-normal" type="text" placeholder="0, 1, 2, etc...">
-        </div>
-      </div>
+      <div class="columns">
+        <!-- P1 Side -->
+        <div class="column">
+          <div class="field">
+            <label class="label">Player 1 Team</label>
+            <div class="control">
+              <input id="field-player1-team" class="input is-normal" type="text" placeholder="TeamOne">
+            </div>
+          </div>
 
-      <div class="field">
-        <label class="label">Player 2 Score</label>
-        <div class="control">
-          <input id="field-player2-score" class="input is-normal" type="text" placeholder="0, 1, 2, etc...">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Player 1</label>
-        <div class="control">
-          <input id="field-player1-name" class="input is-normal" type="text" placeholder="One">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Player 1 Team</label>
-        <div class="control">
-          <input id="field-player1-team" class="input is-normal" type="text" placeholder="TeamOne">
-        </div>
-      </div>
+          <div class="field">
+            <label class="label">Player 1</label>
+            <div class="control">
+              <input id="field-player1-name" class="input is-normal" type="text" placeholder="One">
+            </div>
+          </div>
 
-      <div class="field">
-        <label class="label">Player 2</label>
-        <div class="control">
-          <input id="field-player2-name" class="input is-normal" type="text" placeholder="Two">
+          <div class="field">
+            <label class="label">Player 1 Score</label>
+            <div class="control">
+              <input id="field-player1-score" class="input is-normal" type="text" placeholder="0, 1, 2, etc...">
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="label">Player 2 Team</label>
-        <div class="control">
-          <input id="field-player2-team" class="input is-normal" type="text" placeholder="TeamTwo">
+        <!-- Switch Controls -->
+        <div class="column">
+          <div class="level">
+            <div class="level-item">
+              <button id="btn-switch" class="button is-medium is-primary is-responsive" onclick="switchPlayerInfo()">
+                Switch
+              </button>
+            </div>
+            
+          </div>
+
+        </div>
+        <!-- P2 Side -->
+        <div class="column">
+          <div class="field">
+            <label class="label">Player 2 Team</label>
+            <div class="control">
+              <input id="field-player2-team" class="input is-normal" type="text" placeholder="TeamTwo">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Player 2</label>
+            <div class="control">
+              <input id="field-player2-name" class="input is-normal" type="text" placeholder="Two">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Player 2 Score</label>
+            <div class="control">
+              <input id="field-player2-score" class="input is-normal" type="text" placeholder="0, 1, 2, etc...">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -120,7 +141,7 @@
           onclick="saveSettings()">Save</button>
       </div>
     </div>
-    <br/>
+    <br />
     <div id="notification-saved" class="notification is-success" style="display:none;">
       <button class="delete" onclick="dismissMessage()"></button>
       File saved!

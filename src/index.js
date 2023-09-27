@@ -40,6 +40,27 @@ function loadSettings() {
     });
 }
 
+function switchPlayerInfo() {
+    var settings = {};
+    settings.p1Name = document.getElementById('field-player1-name').value;
+    settings.p1Score = document.getElementById('field-player1-score').value;
+    settings.p1Team = document.getElementById('field-player1-team').value;
+
+    settings.p2Name = document.getElementById('field-player2-name').value;
+    settings.p2Score = document.getElementById('field-player2-score').value;
+    settings.p2Team = document.getElementById('field-player2-team').value;
+
+    document.getElementById('field-player1-name').value = settings.p2Name;
+    document.getElementById('field-player1-score').value = settings.p2Score;
+    document.getElementById('field-player1-team').value = settings.p2Team;
+
+    document.getElementById('field-player2-name').value = settings.p1Name;
+    document.getElementById('field-player2-score').value = settings.p1Score;
+    document.getElementById('field-player2-team').value = settings.p1Team;
+
+    saveSettings();
+}
+
 function openTab(event, tabName) {
     var i, x, tablinks;
     x = document.getElementsByClassName("content-tab");
