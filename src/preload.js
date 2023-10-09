@@ -4,14 +4,15 @@ const { app, contextBridge, ipcRenderer } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const { homedir } = require('os');
+const { pathToFileURL, fileURLToPath } = require('url');
 
 const getDesktopOrHomeDir = () => {
     return path.resolve(homedir(), 'Desktop');
 }
 
-function loadFile() {
+function loadFile(settingsPath) {
     return new Promise((resolve, reject) => {
-        fs.readFile(path.join(getDesktopOrHomeDir(), '/streamcontrol.json'), function (err, data) {
+        fs.readFile(pathToFileURL(settingsPath), function (err, data) {
             if (err) {
                 //TODO gracefully let the user know
                 console.log("Failed to read existing file");
@@ -26,13 +27,13 @@ function loadFile() {
 }
 
 contextBridge.exposeInMainWorld('electron', {
-    saveSettingsFile: (settings) => {
-        fs.writeFile(path.join(getDesktopOrHomeDir(), '/streamcontrol.json'), settings, function (err) {
+    saveSettingsFile: (settings, settingsPath) => {
+        fs.writeFile(pathToFileURL(settingsPath), settings, function (err) {
             if (err) throw err;
             else console.log('Saved');
         })
     },
-    loadSettingsFile: () => {
-        return loadFile();
+    loadSettingsFile: (settingsPath) => {
+        return loadFile(settingsPath);
     }
 });

@@ -10,8 +10,10 @@
 </head>
 <script src="./index.js"></script>
 <script>
-  window.onload = loadSettings();
+  
 </script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <body>
   <nav class="tabs is-centered">
@@ -23,11 +25,14 @@
         <li class="tab" onclick="openTab(event,'match-fields')">
           <a>Match Setup</a>
         </li>
+        <li class="tab" onclick="openTab(event, 'misc-fields')">
+          <a>Misc</a>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <div class="container section">
+  <div class="container">
     <div id="stream-fields" class="content-tab">
       <div class="field">
         <label class="label">Game Title</label>
@@ -46,21 +51,28 @@
       <div class="field">
         <label class="label">Commentator 1</label>
         <div class="control">
-          <input id="field-commentator1-name" class="input is-normal" type="text" placeholder="Coms One">
+          <input id="field-commentator1-name" class="input is-normal" type="text" placeholder="Name for Commentator1">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Comm 1 Handle</label>
+        <div class="control">
+          <input id="field-commentator1-handle" class="input is-normal" type="text" placeholder="Comm1 Handle">
         </div>
       </div>
 
       <div class="field">
         <label class="label">Commentator 2</label>
         <div class="control">
-          <input id="field-commentator2-name" class="input is-normal" type="text" placeholder="Coms Two">
+          <input id="field-commentator2-name" class="input is-normal" type="text" placeholder="Name for Commentator2">
         </div>
       </div>
 
       <div class="field">
-        <label class="label">Commentator 3</label>
+        <label class="label">Comm 2 Handle</label>
         <div class="control">
-          <input id="field-commentator3-name" class="input is-normal" type="text" placeholder="Coms Three">
+          <input id="field-commentator2-handle" class="input is-normal" type="text" placeholder="Comm2 Handle">
         </div>
       </div>
     </div>
@@ -73,7 +85,7 @@
         </div>
       </div>
 
-      <div class="columns">
+      <div class="columns is-mobile">
         <!-- P1 Side -->
         <div class="column">
           <div class="field">
@@ -92,20 +104,38 @@
 
           <div class="field">
             <label class="label">Player 1 Score</label>
-            <div class="control">
-              <input id="field-player1-score" class="input is-normal" type="text" placeholder="0, 1, 2, etc...">
+            <div class="control level">
+              <input id="field-player1-score" class="input is-normal" type="number" placeholder="0, 1, 2, etc..." value="0">
+
+              <button class="button" onclick="modifyScore('field-player1-score', 1)">
+                <span class="icon is-small">
+                  <ion-icon name="add"></ion-icon>
+                </span>
+              </button>
+
+              <button class="button" onclick="modifyScore('field-player1-score', -1)">
+                <span class="icon is-small">
+                  <ion-icon name="remove"></ion-icon>
+                </span>
+              </button>
+
             </div>
           </div>
+
         </div>
+
         <!-- Switch Controls -->
-        <div class="column">
+        <div class="column is-one-quarter">
           <div class="level">
             <div class="level-item">
-              <button id="btn-switch" class="button is-medium is-primary is-responsive" onclick="switchPlayerInfo()">
-                Switch
+              <button id="btn-switch" class="button is-primary" onclick="switchPlayerInfo()">
+                <span class="icon is-small">
+                  <ion-icon name="swap-horizontal"></ion-icon>
+                </span>
+                <span>Switch</span>
               </button>
             </div>
-            
+
           </div>
 
         </div>
@@ -117,36 +147,99 @@
               <input id="field-player2-team" class="input is-normal" type="text" placeholder="TeamTwo">
             </div>
           </div>
+
           <div class="field">
             <label class="label">Player 2</label>
             <div class="control">
               <input id="field-player2-name" class="input is-normal" type="text" placeholder="Two">
             </div>
           </div>
+
           <div class="field">
             <label class="label">Player 2 Score</label>
-            <div class="control">
-              <input id="field-player2-score" class="input is-normal" type="text" placeholder="0, 1, 2, etc...">
+            <div class="control level">
+              <input id="field-player2-score" class="input is-normal" type="number" placeholder="0, 1, 2, etc..." value="0">
+
+              <button class="button" onclick="modifyScore('field-player2-score', 1)">
+                <span class="icon is-small">
+                  <ion-icon name="add"></ion-icon>
+                </span>
+              </button>
+
+              <button class="button" onclick="modifyScore('field-player2-score', -1)">
+                <span class="icon is-small">
+                  <ion-icon name="remove"></ion-icon>
+                </span>
+              </button>
+
             </div>
           </div>
+
         </div>
       </div>
     </div>
+    <div id="misc-fields" class="content-tab" style="display:none;">
+      <div class="field">
+        <label class="label">Misc 1</label>
+        <div class="control">
+          <input id="field-misc1" class="input is-normal" type="text" placeholder="Misc 1...">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Misc 2</label>
+        <div class="control">
+          <input id="field-misc2" class="input is-normal" type="text" placeholder="Misc 2...">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Misc 3</label>
+        <div class="control">
+          <input id="field-misc3" class="input is-normal" type="text" placeholder="Misc 3...">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Misc 4</label>
+        <div class="control">
+          <input id="field-misc4" class="input is-normal" type="text" placeholder="Misc 4...">
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <section class="section is-small">
-    <div class="container">
-      <div class="container">
-        <button id="btn-save" class="button is-medium is-fullwidth is-primary is-responsive"
-          onclick="saveSettings()">Save</button>
-      </div>
+  <div class="container section">
+    <div id="file-path-selector" class="file has-name is-fullwidth">
+      <label class="file-label">
+        <input class="file-input" type="file" name="resume" onchange="fileChanged()">
+        <span class="file-cta">
+          <span class="file-icon">
+            <ion-icon name="attach"></ion-icon>
+          </span>
+          <span class="file-label">
+            Choose location...
+          </span>
+        </span>
+        <span class="file-name">
+          No location selected
+        </span>
+      </label>
     </div>
-    <br />
-    <div id="notification-saved" class="notification is-success" style="display:none;">
-      <button class="delete" onclick="dismissMessage()"></button>
-      File saved!
-    </div>
-  </section>
+
+    <button id="btn-save" class="button is-medium is-fullwidth is-primary is-responsive" onclick="saveSettings()">
+      <span class="icon is-small">
+        <ion-icon name="save"></ion-icon>
+      </span>
+      <span>Save</span>
+    </button>
+  </div>
+  <br />
+  <div id="notification-saved" class="notification is-success">
+    <button class="delete" onclick="dismissMessage()"></button>
+    File saved!
+  </div>
 </body>
 
 </html>
